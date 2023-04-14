@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  height: 65px;
+  justify-content: space-evenly;
+}
+
+.logo {
+  align-self: flex-start;
+  height: 55px;
+}
+
+.searchBar {
+  margin-right: 0px;
+}

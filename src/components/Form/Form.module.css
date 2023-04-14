@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  width: 200px;
+  color: white;
+}
+
+.input{
+    width: 180px;
+    height: 25px;
+
+}
