@@ -7,6 +7,7 @@ import { Detail } from "./components/Detail/Detail.jsx";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import { Routes, Route, useLocation,useNavigate} from "react-router-dom";
+import Favorites from "./components/Favorites/Favorites";
 
 const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
 const API_KEY = "dc4d6486baa4.8a4d7bab6421f4d940a3";
@@ -62,6 +63,7 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/favorites" element={<Favorites/>} />
       </Routes>
 
       <hr />
