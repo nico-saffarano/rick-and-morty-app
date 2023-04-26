@@ -4,29 +4,28 @@ import { Link } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/actions";
 import { useState,useEffect } from "react";
 
-function Card({ id, name,image, onClose,addFav,removeFav,myFavorites }) {
+function Card({id, name, status, species, gender, image, onClose, addFav, removeFav, myFavorites}) {
 
-
-  const [isFav,setIsFav] =useState(false);
+  const [isFav, setIsFav] = useState(false);
 
   const handleFavorite = () => {
-    if (isFav) {
-      setIsFav(false)
-      removeFav(id)
-    }
-    else{
-      setIsFav(true)
-      addFav(id, name, image, onClose)
-    }
+     if(isFav){
+        setIsFav(false);
+        removeFav(id);
+     }
+     else {
+        setIsFav(true);
+        addFav({id, name, species, gender, image, onClose})
+     }
   }
-  useEffect(() => {
-    myFavorites.forEach((fav) => {
-       if (fav.id === id) {
-          setIsFav(true);
-       }
-    });
- }, [myFavorites,id]);
 
+  useEffect(() => {
+     myFavorites.forEach((fav) => {
+        if (fav.id === id) {
+           setIsFav(true);
+        }
+     });
+  }, [myFavorites]);
   return (
     <div className={style.card}>
       {
@@ -43,6 +42,8 @@ function Card({ id, name,image, onClose,addFav,removeFav,myFavorites }) {
         <Link to={`/detail/${id}`}>{name}</Link>
       </h2>
       <img src={image} alt={name} className={style.imageCard} />
+      <h2>Specie: {species}</h2>
+      <h2>Gender: {gender}</h2>
       
     </div>
   );
