@@ -33,29 +33,26 @@ module.exports = {
 const axios = require("axios");
 const URL = "https://rickandmortyapi.com/api/character/";
 
-const getCharByID = (req, res) => {
-  const { id } = req.params;
-  axios
-    .get(`${URL}/${id}`)
-    .then((response) => response.data)
-    .then(({ status, name, species, origin, image, gender }) => {
-      if (name) {
-        const character = {
-          id,
-          image,
-          name,
-          species,
-          origin: origin.name,
-          status,
-          gender,
-        };
-        return res.json(character);
-      }
-      return res.status(404).send("Not found");
-    })
-    .catch((error) => {
-      return res.status(500).send(error.message);
-    });
+const getCharByID = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { data } = await axios.get(`${URL}/${id}`);
+    if (!data.name) throw new Error(`ID ${id} Not found`);
+    const characters = {
+      id: data.id,
+      name: data.name,
+      gender: data.gender,
+      species: data.species,
+      origin: data.origin,
+      image: data.image,
+      status: data.status,
+    };
+    return res.status(200).json(characters);
+  } catch (error) {
+    return error.message.includes("ID")
+      ? response.status(404).send(error.message)
+      : response.status(500).send(error.message);
+  }
 };
 
 module.exports = {
